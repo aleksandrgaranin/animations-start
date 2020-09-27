@@ -52,7 +52,7 @@ class App extends Component {
                 
         </Transition>        
          
-            <Modal show = {this.state.showModal} closed={this.closeModal}/>
+        <Modal show = {this.state.showModal} closed={this.closeModal}/>
        
         <Backdrop show = {this.state.showModal}/>
         <button className="Button" onClick={this.openModal}>Open Modal</button>
