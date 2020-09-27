@@ -28,19 +28,26 @@ class App extends Component {
         <br></br>
         <Transition 
           in={this.state.showBlog} 
-          timeout={300}
+          timeout={1000}
           mountOnEnter
-          unmountOnExit>
-            {state => (
-              <div            
-                style={{
-                  backgroundColor: 'red',
-                  width: '100px',
-                  height: '100px',
-                  margin: 'auto',
-                  transition: 'opacity 1s ease-out',
-                  opacity: state ==='exiting' ? 0 : 1
-              }}/>  
+          unmountOnExit
+          onEnter={() => console.log('onEnter')}
+          onEntering={() => console.log('onEntering')}
+          onEntered={() => console.log('onEntered')}
+          onExit={() => console.log('onExit')}
+          onExiting={() => console.log('onExiting')}
+          onExited={() => console.log('onExited')}
+        >
+          {state => (
+            <div            
+              style={{
+                backgroundColor: 'red',
+                width: '100px',
+                height: '100px',
+                margin: 'auto',
+                transition: 'opacity 1s ease-out',
+                opacity: state ==='exiting' ? 0 : 1
+            }}/>  
           )}
                 
         </Transition>        
