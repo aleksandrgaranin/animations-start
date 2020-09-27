@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Transition from 'react-transition-group/Transition';
 
 import "./App.css";
 import Modal from "./components/Modal/Modal";
@@ -7,7 +8,8 @@ import List from "./components/List/List";
 
 class App extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    showBlog: false
   }
   
   openModal = () => {
@@ -22,7 +24,31 @@ class App extends Component {
     return (
       <div className="App">
         <h1>React Animations</h1>
-        <Modal show = {this.state.showModal} closed={this.closeModal}/>
+        <button  className="Button"  onClick={()=> this.setState(prevState => ({showBlog: !prevState.showBlog}))}>toggle</button>
+        <br></br>
+        <Transition 
+          in={this.state.showBlog} 
+          timeout={300}
+          mountOnEnter
+          unmountOnExit>
+            {state => (
+              <div            
+                style={{
+                  backgroundColor: 'red',
+                  width: '100px',
+                  height: '100px',
+                  margin: 'auto',
+                  transition: 'opacity 1s ease-out',
+                  opacity: state ==='exiting' ? 0 : 1
+              }}/>  
+          )}
+                
+        </Transition>
+        <Transition in={this.state.showModal} timeout={300} mountOnEnter unmountOnExit >
+          {state => (
+            <Modal show = {state} closed={this.closeModal}/>
+          )}
+        </Transition>
         <Backdrop show = {this.state.showModal}/>
         <button className="Button" onClick={this.openModal}>Open Modal</button>
         <h3>Animating Lists</h3>
